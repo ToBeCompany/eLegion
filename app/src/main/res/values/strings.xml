@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">eLegion</string>
+    <string name="profile">Профиль</string>
+    <string name="home">Главная</string>
 </resources>
