@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.castprogramms.elegion.R
+import com.castprogramms.elegion.databinding.ProfileFragmentBinding
 
 class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
@@ -15,7 +17,13 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.profile_fragment, container, false)
+        val view = inflater.inflate(R.layout.profile_fragment, container, false)
+        val binding = ProfileFragmentBinding.bind(view)
+
+        binding.toCheckList.setOnClickListener {
+            findNavController().navigate(R.id.action_item_profile_to_checkFragment2)
+        }
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
