@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/item_chats"
         android:name="com.castprogramms.elegion.ui.chats.ChatsFragment"
-        android:label="chats_fragment"
+        android:label="@string/chats_title"
         tools:layout="@layout/chats_fragment" />
         <action
             android:id="@+id/action_item_profile_to_checkFragment2"
