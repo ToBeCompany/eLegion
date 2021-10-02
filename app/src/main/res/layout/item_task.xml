@@ -21,20 +21,18 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="16dp"
-            android:textStyle="bold"
+            android:text="DO something"
             android:textSize="18sp"
-            android:text="DO something"/>
+            android:textStyle="bold" />
 
         <net.igenius.customcheckbox.CustomCheckBox
             android:id="@+id/is_need"
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_gravity="end|center_vertical"
-            app:color_checked="@color/black_main"
             android:layout_marginEnd="16dp"
+            app:color_checked="@color/black_main"
             app:layout_constraintDimensionRatio="1:1" />
-
-
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
