@@ -54,6 +54,6 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
     }
 
     private fun updateUI() {
-        TODO("Not yet implemented")
+
     }
 }
