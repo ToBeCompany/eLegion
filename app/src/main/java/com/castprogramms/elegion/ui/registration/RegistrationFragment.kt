@@ -6,11 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.coroutineScope
 import com.castprogramms.elegion.data.UserType
 import com.castprogramms.elegion.databinding.RegistrationFragmentBinding
+import com.castprogramms.elegion.repository.Resource
 import com.google.android.material.datepicker.MaterialDatePicker
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationFragment : Fragment() {
@@ -34,9 +39,14 @@ class RegistrationFragment : Fragment() {
                 UserType.values()
             )
         )
+        binding.userType.setOnItemClickListener { adapterView, view, i, l ->
+            viewModel.setUserType(
+                UserType.values()[i]
+            )
+        }
         //TODO REALIZE VALIDATE
         binding.userNameText.addTextChangedListener { viewModel.userNameValidate(it.toString()) }
-        binding.telegramText.addTextChangedListener { viewModel.userNameValidate(it.toString()) }
+        binding.telegramText.addTextChangedListener { viewModel.setTelegram(it.toString()) }
         binding.datePicker.setOnClickListener {
             createDatePicker {
                 viewModel.setBirthday(it)
@@ -44,7 +54,23 @@ class RegistrationFragment : Fragment() {
         }
 
         binding.doneButton.setOnClickListener {
-            viewModel.createUser()
+            lifecycle.coroutineScope.launch {
+                viewModel.createUser().collectLatest {
+                    when (it) {
+                        is Resource.Error -> {
+                            binding.progressBar.visibility = View.GONE
+                            Toast.makeText(requireContext(),it.message, Toast.LENGTH_LONG).show()
+                        }
+                        is Resource.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                        }
+                        is Resource.Success -> {
+                            binding.progressBar.visibility = View.GONE
+                            Toast.makeText(requireContext(),"SECCESS", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+            }
         }
         super.onViewCreated(view, savedInstanceState)
     }

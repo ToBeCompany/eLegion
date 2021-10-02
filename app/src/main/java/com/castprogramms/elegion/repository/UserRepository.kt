@@ -11,7 +11,7 @@ import kotlinx.coroutines.tasks.await
 
 class UserRepository {
     companion object {
-        private const val COLLECTION_USERS = "telegramms"
+        private const val COLLECTION_USERS = "users"
     }
 
     private val usersCollection = FirebaseFirestore.getInstance().collection(COLLECTION_USERS)

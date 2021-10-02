@@ -7,6 +7,7 @@ import com.castprogramms.elegion.repository.TaskRepository
 import com.castprogramms.elegion.repository.UserRepository
 import com.castprogramms.elegion.ui.calendar.CalendarViewModel
 import com.castprogramms.elegion.ui.chats.ChatsViewModel
+import com.castprogramms.elegion.ui.registration.RegistrationViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -22,6 +23,7 @@ class ELegionerApplication : Application() {
         single<TaskRepository> { TaskRepository() }
         viewModel { ChatsViewModel(get()) }
         viewModel { CalendarViewModel(get()) }
+        viewModel { RegistrationViewModel(get()) }
     }
 
     override fun onCreate() {

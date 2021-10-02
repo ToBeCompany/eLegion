@@ -15,35 +15,26 @@
         android:id="@+id/item_profile"
         android:name="com.castprogramms.elegion.ui.profile.ProfileFragment"
         android:label="@string/profile"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/profile_fragment"/>
     <fragment
         android:id="@+id/item_chats"
-        android:name="com.castprogramms.elegion.ui.ChatsFragment"
+        android:name="com.castprogramms.elegion.ui.chats.ChatsFragment"
         android:label="chats_fragment"
-        tools:layout="@layout/chats_fragment" />
+        tools:layout="@layout/chats_fragment">
 
-        tools:layout="@layout/profile_fragment" >
-        <action
-            android:id="@+id/action_item_profile_to_checkFragment2"
-            app:destination="@id/checkFragment" />
+    </fragment>
+
+
     <fragment
         android:id="@+id/checkFragment"
         android:name="com.castprogramms.elegion.ui.checklist.CheckFragment"
         android:label="@string/check_list" />
-        tools:layout="@layout/profile_fragment" />
 
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.castprogramms.elegion.ui.registration.RegistrationFragment"
         android:label="registration_fragment"
         tools:layout="@layout/registration_fragment" />
-        android:id="@+id/item_calendar"
-        android:name="com.castprogramms.elegion.ui.calendar.CalendarFragment"
-        android:label="CalendarFragment" />
 
-    <fragment
-        android:id="@+id/item_chats"
-        android:name="com.castprogramms.elegion.ui.ChatsFragment"
-        android:label="chats_fragment"
-        tools:layout="@layout/chats_fragment" />
+
 </navigation>

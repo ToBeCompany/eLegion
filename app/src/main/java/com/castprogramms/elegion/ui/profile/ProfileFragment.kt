@@ -21,7 +21,7 @@ class ProfileFragment : Fragment() {
         val binding = ProfileFragmentBinding.bind(view)
 
         binding.toCheckList.setOnClickListener {
-            findNavController().navigate(R.id.action_item_profile_to_checkFragment2)
+//            findNavController().navigate(R.id.action_item_profile_to_checkFragment2)
         }
         return view
     }
