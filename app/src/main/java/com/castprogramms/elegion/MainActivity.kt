@@ -12,19 +12,14 @@ import com.google.firebase.ktx.Firebase
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityMainBinding
-    val db = Firebase.firestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val ta = TelegramAddress("Arbonik", "https://t.me/arbonik")
-        FirebaseReference.addTelegramAddress(ta, db)
-        binding.button.setOnClickListener {
-
-        }
-
     }
+    val ta = TelegramAddress("Arbonik", "https://t.me/arbonik")
+
     private fun openUri(uri : String){
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
         startActivity(intent)
