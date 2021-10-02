@@ -16,6 +16,7 @@ import com.castprogramms.elegion.databinding.RegistrationFragmentBinding
 import com.castprogramms.elegion.repository.Resource
 import com.castprogramms.elegion.ui.authentication.AuthenticationViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -71,6 +72,8 @@ class RegistrationFragment : Fragment(R.layout.registration_fragment) {
                             }
                             is Resource.Success -> {
                                 binding.progressBar.visibility = View.GONE
+                                val user = async { authViewModel.getUser(account.id) }
+                                authViewModel.auth(user.await())
                                 (requireActivity() as RegistrationActivity).goToMain()
                             }
                         }
