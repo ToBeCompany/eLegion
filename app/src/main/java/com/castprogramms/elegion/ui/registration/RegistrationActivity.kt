@@ -7,6 +7,8 @@ import androidx.lifecycle.coroutineScope
 import com.castprogramms.elegion.MainActivity
 import com.castprogramms.elegion.databinding.ActivityRegistrationBinding
 import com.castprogramms.elegion.ui.authentication.AuthenticationViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -24,14 +26,13 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel.auth.addOnCompleteListener {
-            if (it.isSuccessful) {
-                if (viewModel.isAuth) {
-                    lifecycle.coroutineScope.launch {
-                        val user = async { viewModel.getUser(it.result.id) }
-                        viewModel.auth(user.await())
-                        goToMain()
-                    }
+        val googleAuth = GoogleSignIn.getLastSignedInAccount(this)
+        if (googleAuth != null){
+            lifecycle.coroutineScope.launch(Dispatchers.IO) {
+                val user =  viewModel.getUser(googleAuth.id)
+                if (user != null) {
+                    user.let { viewModel.auth(it) }
+                    goToMain()
                 }
             }
         }
