@@ -1,4 +1,4 @@
-package com.castprogramms.elegion
+package com.castprogramms.elegion.repository
 
 sealed class Resource<T>(
     val data: T? = null,

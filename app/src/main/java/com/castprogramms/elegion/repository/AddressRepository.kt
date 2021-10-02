@@ -1,4 +1,4 @@
-package com.castprogramms.elegion
+package com.castprogramms.elegion.repository
 
 import com.castprogramms.elegion.data.TelegramAddress
 import com.google.firebase.firestore.DocumentReference

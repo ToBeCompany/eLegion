@@ -14,7 +14,7 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
-import com.castprogramms.elegion.Resource
+import com.castprogramms.elegion.repository.Resource
 import com.castprogramms.elegion.data.TelegramAddress
 import com.castprogramms.elegion.databinding.ChatsFragmentBinding
 import kotlinx.coroutines.flow.collectLatest

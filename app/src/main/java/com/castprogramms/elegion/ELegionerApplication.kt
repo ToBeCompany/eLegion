@@ -1,6 +1,7 @@
 package com.castprogramms.elegion
 
 import android.app.Application
+import com.castprogramms.elegion.repository.AddressRepository
 import com.castprogramms.elegion.ui.ChatsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
