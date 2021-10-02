@@ -10,9 +10,10 @@
     <string name="name_hint">Введите имя</string>
     <string name="userType">Должность</string>
     <string name="telegramHint">Ссылка на ваш телеграм</string>
-    <string name="dateHint">Укажите дату рождения</string>
+    <string name="dateHint">Дата рождения</string>
     <string name="done">Готово</string>
     <string name="ok">Ok</string>
     <string name="signOut">Выйти</string>
     <string name="text">Введите текст:</string>
+    <string name="registr">зарегистрироваться</string>
 </resources>

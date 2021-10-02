@@ -15,7 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationActivity : AppCompatActivity() {
     companion object {
-        val SIGN_IN_CODE = 7
+        const val SIGN_IN_CODE = 7
     }
 
     private lateinit var binding: ActivityRegistrationBinding

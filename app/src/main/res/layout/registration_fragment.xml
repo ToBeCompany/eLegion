@@ -4,18 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#131313"
     tools:context=".ui.registration.RegistrationFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_path"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/end_top"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/image_splash"
+            app:layout_constraintBottom_toTopOf="@id/atpv_1" />
+
+        <yanzhikai.textpath.AsyncTextPathView
+            android:id="@+id/atpv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="10dp"
+            app:autoStart="true"
+            app:duration="2000"
+            app:fillColor="@color/textSplash"
+            app:layout_constraintBottom_toTopOf="@id/atpv_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:pathStrokeColor="@color/textSplash"
+            app:showPainter="true"
+            app:text="Легионеры разрабатывают"
+            app:textInCenter="true"
+            app:textSize="30sp" />
+
+        <yanzhikai.textpath.AsyncTextPathView
+            android:id="@+id/atpv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="10dp"
+            app:autoStart="true"
+            app:duration="2000"
+            app:fillColor="@color/textSplash"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:pathStrokeColor="@color/textSplash"
+            app:showPainter="true"
+            app:text="приложения с 2005 года"
+            app:textInCenter="true"
+            app:textSize="30sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/userTextContainer"
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="31dp"
         android:hint="@string/name_hint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/top_path">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:textColor="@color/white"
             android:id="@+id/userNameText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -24,15 +84,21 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/userTypeContainer"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        style="@style/LoginTextInputLayoutStyleDropDown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginTop="17dp"
         android:hint="@string/userType"
+        app:endIconTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userTextContainer">
 
         <AutoCompleteTextView
+            android:background="#131313"
+            android:textColor="@color/white"
             android:id="@+id/userType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,38 +106,84 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/datePicker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/dateHint"
-        app:layout_constraintTop_toBottomOf="@id/userTypeContainer" />
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/telegramTextContainer"
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginTop="17dp"
         android:layout_height="wrap_content"
         android:hint="@string/telegramHint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/datePicker">
+        app:layout_constraintTop_toBottomOf="@id/userTypeContainer">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/telegramText"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start_button_birthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/datePicker"
+        android:layout_width="0dp"
+        app:icon="@drawable/calendar"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="31dp"
+        android:layout_marginTop="17dp"
+        android:text="@string/dateHint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/start_button_birthday"
+        app:layout_constraintTop_toBottomOf="@id/telegramTextContainer" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:textStyle="normal"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/datePicker"
+        app:layout_constraintEnd_toEndOf="@id/start_button_birthday"
+        app:layout_constraintBottom_toBottomOf="@id/datePicker"
+        android:textColor="#C4C4C4"
+        tools:text="14.04.2003" />
+
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/doneButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/done"
-        app:layout_constraintTop_toBottomOf="@+id/telegramTextContainer" />
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:text="@string/registr"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/center"
+        app:layout_constraintEnd_toEndOf="@id/center"
+        android:layout_marginBottom="50dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="72dp"
+        app:spinning_bar_color="@color/white"
+        app:spinning_bar_padding="6dp"
+        app:spinning_bar_width="4dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
