@@ -2,7 +2,9 @@ package com.castprogramms.elegion
 
 import android.app.Application
 import com.castprogramms.elegion.repository.AddressRepository
-import com.castprogramms.elegion.ui.ChatsViewModel
+import com.castprogramms.elegion.repository.CalendarRepository
+import com.castprogramms.elegion.ui.calendar.CalendarViewModel
+import com.castprogramms.elegion.ui.chats.ChatsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -13,7 +15,9 @@ class ELegionerApplication : Application() {
 
     val appModule = module {
         single<AddressRepository> { AddressRepository() }
+        single<CalendarRepository> { CalendarRepository() }
         viewModel { ChatsViewModel(get()) }
+        viewModel { CalendarViewModel(get()) }
     }
 
     override fun onCreate() {

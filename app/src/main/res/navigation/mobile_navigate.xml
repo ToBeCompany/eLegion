@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/item_chats"
-        android:name="com.castprogramms.elegion.ui.ChatsFragment"
+        android:name="com.castprogramms.elegion.ui.chats.ChatsFragment"
         android:label="chats_fragment"
         tools:layout="@layout/chats_fragment" />
 </navigation>

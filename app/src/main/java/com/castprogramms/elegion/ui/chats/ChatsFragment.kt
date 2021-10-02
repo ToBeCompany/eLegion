@@ -1,4 +1,4 @@
-package com.castprogramms.elegion.ui
+package com.castprogramms.elegion.ui.chats
 
 import android.R
 import android.app.AlertDialog

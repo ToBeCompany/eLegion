@@ -1,4 +1,4 @@
-package com.castprogramms.elegion.ui
+package com.castprogramms.elegion.ui.chats
 
 import androidx.lifecycle.ViewModel
 import com.castprogramms.elegion.repository.AddressRepository
