@@ -24,7 +24,7 @@
             android:exported="true">
         </activity>
 
-        <activity android:name=".RegistrationActivity"
+        <activity android:name=".ui.registration.RegistrationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.castprogramms.elegion.R
-import com.castprogramms.elegion.RegistrationActivity
+import com.castprogramms.elegion.ui.registration.RegistrationActivity
 import com.castprogramms.elegion.data.UserType
 import com.castprogramms.elegion.databinding.RegistrationFragmentBinding
 import com.google.android.material.datepicker.MaterialDatePicker

@@ -31,6 +31,12 @@ class UserRepository {
         emit(Resource.Error(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
+    suspend fun hasUser(userId: String) : User? = try {
+        usersCollection.document(userId).get().await().toObject(User::class.java)
+    } catch (e : Exception) {
+        null
+    }
+
     fun getUser(userId: String) = flow<Resource<User>> {
         emit(Resource.Loading())
         val user = usersCollection.document(userId).get().await()
@@ -45,4 +51,9 @@ class UserRepository {
     }.catch {
         emit(Resource.Error(it.message.toString()))
     }.flowOn(Dispatchers.IO)
+
+    fun singOut() {
+        //TODO
+    }
+
 }

@@ -1,25 +1,24 @@
 package com.castprogramms.elegion.ui.authentication
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
 import com.castprogramms.elegion.ELegionerApplication
-import com.castprogramms.elegion.repository.AuthenticationRepository
-import com.castprogramms.elegion.repository.AuthenticationResult
+import com.castprogramms.elegion.repository.UserRepository
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 class AuthenticationViewModel(
-    private val repository: AuthenticationRepository,
+    private val userRepository: UserRepository,
     application: Application
 ) : AndroidViewModel(application) {
-    val SIGN_IN_CODE = 7
-    val needRegistrationLiveData = MutableLiveData<Boolean>(null)
 
     val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
         .requestEmail().build()
@@ -39,18 +38,17 @@ class AuthenticationViewModel(
     }
 
     fun signOut() {
-        googleSignInClient.signOut()//.addOnSuccessListener {   }
+        googleSignInClient.signOut()
+        userRepository.singOut()
     }
 
-    fun getUser() = repository.user
+    fun handleSignInResult(task: Task<GoogleSignInAccount>) = flow {
+        account = task.getResult(ApiException::class.java)
+        emit(loadUserData(account))
+    }.catch {
+        emit(false)
+    }.flowOn(Dispatchers.IO)
 
-    fun handleSignInResult(task: Task<GoogleSignInAccount>): AuthenticationResult {
-        return try {
-            account = task.getResult(ApiException::class.java)
-            Log.e("Test", "almost win")
-            repository.loadUserData(account) { needRegistrationLiveData.postValue(it) }
-        } catch (e: ApiException) {
-            repository.loadUserData(null) { needRegistrationLiveData.postValue(it) }
-        }
-    }
+    private suspend fun loadUserData(account: GoogleSignInAccount?) =
+        (account != null && userRepository.hasUser(account.id) == null)
 }
