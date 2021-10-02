@@ -13,4 +13,5 @@
     <string name="dateHint">Укажите дату рождения</string>
     <string name="done">Готово</string>
     <string name="ok">Ok</string>
+    <string name="text">Введите текст:</string>
 </resources>

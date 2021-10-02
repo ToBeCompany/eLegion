@@ -1,10 +1,10 @@
 package com.castprogramms.elegion.tools
 
-import android.R
 import android.app.AlertDialog
 import android.content.Context
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
+import com.castprogramms.elegion.R
 
 fun buildTextInputDialog(
     context: Context,
