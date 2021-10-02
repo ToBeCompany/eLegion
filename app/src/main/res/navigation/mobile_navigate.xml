@@ -15,6 +15,15 @@
         android:id="@+id/item_profile"
         android:name="com.castprogramms.elegion.ui.profile.ProfileFragment"
         android:label="@string/profile"
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_item_profile_to_checkFragment2"
+            app:destination="@id/checkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkFragment"
+        android:name="com.castprogramms.elegion.ui.checklist.CheckFragment"
+        android:label="@string/check_list" />
         tools:layout="@layout/profile_fragment" />
 
     <fragment
