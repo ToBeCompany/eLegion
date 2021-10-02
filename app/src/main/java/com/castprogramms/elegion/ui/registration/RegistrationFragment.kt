@@ -1,6 +1,5 @@
 package com.castprogramms.elegion.ui.registration
 
-import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +7,14 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import com.castprogramms.elegion.R
+import com.castprogramms.elegion.RegistrationActivity
 import com.castprogramms.elegion.data.UserType
 import com.castprogramms.elegion.databinding.RegistrationFragmentBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RegistrationFragment : Fragment() {
+class RegistrationFragment : Fragment(R.layout.registration_fragment) {
 
     private val viewModel: RegistrationViewModel by viewModel()
     private lateinit var binding: RegistrationFragmentBinding
@@ -30,7 +31,7 @@ class RegistrationFragment : Fragment() {
         binding.userType.setAdapter(
             ArrayAdapter(
                 requireContext(),
-                R.layout.simple_list_item_1,
+                android.R.layout.simple_list_item_1,
                 UserType.values()
             )
         )
@@ -45,6 +46,7 @@ class RegistrationFragment : Fragment() {
 
         binding.doneButton.setOnClickListener {
             viewModel.createUser()
+            (requireActivity() as RegistrationActivity).goToMain()
         }
         super.onViewCreated(view, savedInstanceState)
     }

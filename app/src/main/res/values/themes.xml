@@ -14,10 +14,6 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="FloatingActionButton">
-        <item name="android:backgroundTint">@color/peach</item>
-    </style>
-
     <style name="textBlackWhite">
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/black</item>
