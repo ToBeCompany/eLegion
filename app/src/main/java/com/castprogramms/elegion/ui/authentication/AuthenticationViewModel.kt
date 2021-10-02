@@ -41,16 +41,6 @@ class AuthenticationViewModel(
         userRepository.singOut()
     }
 
-    fun handleSignInResult(task: Task<GoogleSignInAccount>) = flow {
-        account = task.getResult(ApiException::class.java)
-        emit(userNeedToRegistation(account))
-    }.catch {
-        emit(false)
-    }.flowOn(Dispatchers.IO)
-
-    private suspend fun userNeedToRegistation(account: GoogleSignInAccount?) =
-        (account != null && userRepository.hasUser(account.id) == null)
-
     suspend fun getUser(userId : String) = withContext(Dispatchers.IO){
         userRepository.getUser(userId)
     }

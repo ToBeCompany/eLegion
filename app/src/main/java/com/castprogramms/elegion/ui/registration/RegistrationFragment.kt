@@ -59,9 +59,9 @@ class RegistrationFragment : Fragment(R.layout.registration_fragment) {
         }
 
         binding.doneButton.setOnClickListener {
-            authViewModel.account?.let {
+            authViewModel.account?.let {account ->
                 lifecycle.coroutineScope.launch {
-                    viewModel.createUser(it.id).collectLatest {
+                    viewModel.createUser(account.id).collectLatest {
                         when (it) {
                             is Resource.Error -> {
                                 binding.progressBar.visibility = View.GONE
