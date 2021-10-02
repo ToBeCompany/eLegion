@@ -1,15 +1,12 @@
 package com.castprogramms.elegion.repository
 
 import com.castprogramms.elegion.data.User
-import com.castprogramms.elegion.data.UserType
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 class UserRepository {
@@ -19,7 +16,7 @@ class UserRepository {
 
     private val usersCollection = FirebaseFirestore.getInstance().collection(COLLECTIONS_USERS)
 
-    var currentUser : User? = null
+    var currentUser: User? = null
         private set
 
     fun createUser(user: User) = flow<Resource<DocumentReference>> {
@@ -30,28 +27,18 @@ class UserRepository {
         emit(Resource.Error(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
-    suspend fun hasUser(userId: String) : User? = try {
-        usersCollection.whereEqualTo(User::userId.name, userId).get().await().toObjects(User::class.java).first()
-    } catch (e : Exception) {
+    suspend fun hasUser(userId: String): User? = try {
+        usersCollection.whereEqualTo(User::userId.name, userId).get().await()
+            .toObjects(User::class.java).first()
+    } catch (e: Exception) {
         null
     }
 
-    fun getUser(userId: String) = flow<Resource<User>> {
-        emit(Resource.Loading())
-        val user = usersCollection.whereEqualTo(User::userId.name, userId).get().await()
-        if (user != null) {
-            if (user.toObjects(User::class.java).first() != null)
-                emit(Resource.Success(user.first().toObject(User::class.java)))
-            else
-                emit(Resource.Error("Не тот тип данных"))
-        } else {
-            emit(Resource.Error("Нет такого пользователя"))
-        }
-    }.catch {
-        emit(Resource.Error(it.message.toString()))
-    }.flowOn(Dispatchers.IO)
+    suspend fun getUser(userId: String) =
+        usersCollection.whereEqualTo(User::userId.name, userId).get().await()
+            .toObjects(User::class.java).first()
 
-    fun auth(user : User){
+    fun auth(user: User) {
         currentUser = user
     }
 

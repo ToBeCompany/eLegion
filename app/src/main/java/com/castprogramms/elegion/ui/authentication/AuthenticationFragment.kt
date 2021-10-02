@@ -2,7 +2,6 @@ package com.castprogramms.elegion.ui.authentication
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
@@ -14,10 +13,8 @@ import com.castprogramms.elegion.ui.registration.RegistrationActivity
 import com.castprogramms.elegion.ui.registration.RegistrationActivity.Companion.SIGN_IN_CODE
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import kotlin.concurrent.timerTask
 
@@ -70,7 +67,6 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
                             viewModel.account = it.result
                             setTimerToGoRegistr()
                         } else {
-                            viewModel.auth(hasUser)
                             (requireActivity() as RegistrationActivity).goToMain()
                         }
                     }

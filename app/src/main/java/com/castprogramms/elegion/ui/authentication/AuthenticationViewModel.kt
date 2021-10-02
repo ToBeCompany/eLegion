@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
 
 class AuthenticationViewModel(
     private val userRepository: UserRepository,
@@ -40,17 +41,11 @@ class AuthenticationViewModel(
         userRepository.singOut()
     }
 
-    fun handleSignInResult(task: Task<GoogleSignInAccount>) = flow {
-        account = task.getResult(ApiException::class.java)
-        emit(userNeedToRegistation(account))
-    }.catch {
-        emit(false)
-    }.flowOn(Dispatchers.IO)
+    suspend fun getUser(userId : String) = withContext(Dispatchers.IO){
+        userRepository.getUser(userId)
+    }
 
-    private suspend fun userNeedToRegistation(account: GoogleSignInAccount?) =
-        (account != null && userRepository.hasUser(account.id) == null)
-
-    fun auth(user: User) {
+    fun auth(user: User){
         userRepository.auth(user)
     }
 
