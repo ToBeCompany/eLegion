@@ -19,7 +19,7 @@ class UserRepository {
 
     private val usersCollection = FirebaseFirestore.getInstance().collection(COLLECTIONS_USERS)
 
-    var currentUser : User? = null//User("123456", "name", UserType.BEGINNER, "123124", "tk")
+    var currentUser : User? = null
         private set
 
     fun createUser(user: User) = flow<Resource<DocumentReference>> {
