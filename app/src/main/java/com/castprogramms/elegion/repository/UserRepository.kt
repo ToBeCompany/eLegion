@@ -19,8 +19,7 @@ class UserRepository {
 
     private val usersCollection = FirebaseFirestore.getInstance().collection(COLLECTIONS_USERS)
 
-    //TODO replace init value to null
-    var currentUser : User? = User("123456", "name", UserType.BEGINNER, "123124", "tk")
+    var currentUser : User? = null
         private set
 
     fun createUser(user: User) = flow<Resource<DocumentReference>> {
@@ -31,12 +30,18 @@ class UserRepository {
         emit(Resource.Error(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
+    suspend fun hasUser(userId: String) : User? = try {
+        usersCollection.whereEqualTo(User::userId.name, userId).get().await().toObjects(User::class.java).first()
+    } catch (e : Exception) {
+        null
+    }
+
     fun getUser(userId: String) = flow<Resource<User>> {
         emit(Resource.Loading())
-        val user = usersCollection.document(userId).get().await()
+        val user = usersCollection.whereEqualTo(User::userId.name, userId).get().await()
         if (user != null) {
-            if (user.toObject(User::class.java) != null)
-                emit(Resource.Success(user.toObject(User::class.java)!!))
+            if (user.toObjects(User::class.java).first() != null)
+                emit(Resource.Success(user.first().toObject(User::class.java)))
             else
                 emit(Resource.Error("Не тот тип данных"))
         } else {
@@ -45,4 +50,13 @@ class UserRepository {
     }.catch {
         emit(Resource.Error(it.message.toString()))
     }.flowOn(Dispatchers.IO)
+
+    fun auth(user : User){
+        currentUser = user
+    }
+
+    fun singOut() {
+        currentUser = null
+    }
+
 }

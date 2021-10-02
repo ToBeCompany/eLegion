@@ -32,10 +32,9 @@ class RegistrationViewModel(
         telegram.value = address
     }
 
-    fun createUser(): Flow<Resource<DocumentReference>> {
-        //TODO take uuid from google acc
+    fun createUser(id : String): Flow<Resource<DocumentReference>> {
         val user = User(
-            UUID.randomUUID().toString(),
+            id,
             userName.value,
             type.value,
             birthday.value.toString(),

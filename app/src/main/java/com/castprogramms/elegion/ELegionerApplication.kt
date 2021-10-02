@@ -20,7 +20,6 @@ class ELegionerApplication : Application() {
         single { CalendarRepository() }
         single { UserRepository() }
         single { TaskRepository() }
-        single { AuthenticationRepository(get()) }
         viewModel { ChatsViewModel(get()) }
         viewModel { CalendarViewModel(get()) }
         viewModel { AuthenticationViewModel(get(), this@ELegionerApplication) }
