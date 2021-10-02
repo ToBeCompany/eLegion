@@ -64,13 +64,13 @@ class RegistrationFragment : Fragment(R.layout.registration_fragment) {
                     viewModel.createUser(account.id).collectLatest {
                         when (it) {
                             is Resource.Error -> {
-                                binding.progressBar.visibility = View.GONE
+//                                binding.progressBar.visibility = View.GONE
                             }
                             is Resource.Loading -> {
-                                binding.progressBar.visibility = View.VISIBLE
+//                                binding.progressBar.visibility = View.VISIBLE
                             }
                             is Resource.Success -> {
-                                binding.progressBar.visibility = View.GONE
+//                                binding.progressBar.visibility = View.GONE
                                 (requireActivity() as RegistrationActivity).goToMain()
                             }
                         }
