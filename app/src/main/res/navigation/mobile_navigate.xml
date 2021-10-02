@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigate"
-    app:startDestination="@id/item_home">
+    app:startDestination="@id/registrationFragment">
 
     <fragment
         android:id="@+id/item_home"
         android:name="com.castprogramms.elegion.ui.main.MainFragment"
         android:label="@string/home"
         tools:layout="@layout/main_fragment" />
+
     <fragment
         android:id="@+id/item_profile"
         android:name="com.castprogramms.elegion.ui.profile.ProfileFragment"
@@ -20,6 +21,7 @@
         android:name="com.castprogramms.elegion.ui.ChatsFragment"
         android:label="chats_fragment"
         tools:layout="@layout/chats_fragment" />
+
         <action
             android:id="@+id/action_item_profile_to_checkFragment2"
             app:destination="@id/checkFragment" />
@@ -27,4 +29,9 @@
         android:id="@+id/checkFragment"
         android:name="com.castprogramms.elegion.ui.checklist.CheckFragment"
         android:label="@string/check_list" />
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.castprogramms.elegion.ui.registration.RegistrationFragment"
+        android:label="registration_fragment"
+        tools:layout="@layout/registration_fragment" />
 </navigation>
