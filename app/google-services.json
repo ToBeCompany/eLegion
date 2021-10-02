@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "727352047487",
+    "project_id": "elegion-b079a",
+    "storage_bucket": "elegion-b079a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727352047487:android:d7a90a494aa2965adccc4a",
+        "android_client_info": {
+          "package_name": "com.castprogramms.elegion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "727352047487-1rv7r7c2pr9pmiidgsp7akbomu7h4e5o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuQJRG14G8FFBx7FPKOIayr8VMEiNO6Gg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "727352047487-1rv7r7c2pr9pmiidgsp7akbomu7h4e5o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
