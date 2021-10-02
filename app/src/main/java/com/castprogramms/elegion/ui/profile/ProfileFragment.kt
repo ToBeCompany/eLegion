@@ -18,10 +18,11 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.profile_fragment, container, false)
+
         val binding = ProfileFragmentBinding.bind(view)
 
         binding.toCheckList.setOnClickListener {
-//            findNavController().navigate(R.id.action_item_profile_to_checkFragment2)
+            findNavController().navigate(R.id.action_item_profile_to_checkFragment2)
         }
         return view
     }

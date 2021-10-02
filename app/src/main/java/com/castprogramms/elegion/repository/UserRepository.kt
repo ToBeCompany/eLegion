@@ -1,6 +1,7 @@
 package com.castprogramms.elegion.repository
 
 import com.castprogramms.elegion.data.User
+import com.castprogramms.elegion.data.UserType
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +18,10 @@ class UserRepository {
     }
 
     private val usersCollection = FirebaseFirestore.getInstance().collection(COLLECTIONS_USERS)
+
+    //TODO replace init value to null
+    var currentUser : User? = User("123456", "name", UserType.BEGINNER, "123124", "tk")
+        private set
 
     fun createUser(user: User) = flow<Resource<DocumentReference>> {
         emit(Resource.Loading())

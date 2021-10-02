@@ -5,6 +5,7 @@ import com.castprogramms.elegion.repository.*
 import com.castprogramms.elegion.ui.authentication.AuthenticationViewModel
 import com.castprogramms.elegion.ui.calendar.CalendarViewModel
 import com.castprogramms.elegion.ui.chats.ChatsViewModel
+import com.castprogramms.elegion.ui.checklist.CheckViewModel
 import com.castprogramms.elegion.ui.registration.RegistrationViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -24,6 +25,7 @@ class ELegionerApplication : Application() {
         viewModel { CalendarViewModel(get()) }
         viewModel { AuthenticationViewModel(get(), this@ELegionerApplication) }
         viewModel { RegistrationViewModel(get()) }
+        viewModel { CheckViewModel(get(), get()) }
     }
 
     override fun onCreate() {
