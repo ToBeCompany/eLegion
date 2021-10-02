@@ -10,11 +10,18 @@
         android:name="com.castprogramms.elegion.ui.main.MainFragment"
         android:label="@string/home"
         tools:layout="@layout/main_fragment" />
+
     <fragment
         android:id="@+id/item_profile"
         android:name="com.castprogramms.elegion.ui.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/profile_fragment" />
+
+    <fragment
+        android:id="@+id/item_calendar"
+        android:name="com.castprogramms.elegion.ui.calendar.CalendarFragment"
+        android:label="CalendarFragment" />
+
     <fragment
         android:id="@+id/item_chats"
         android:name="com.castprogramms.elegion.ui.ChatsFragment"
