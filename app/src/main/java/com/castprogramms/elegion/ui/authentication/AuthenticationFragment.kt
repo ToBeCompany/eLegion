@@ -26,6 +26,8 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAuthenticationBinding.bind(view)
+        binding.atpv1.setFillColor(true)
+        binding.atpv2.setFillColor(true)
 
         binding.enter.setOnClickListener {
             signIn()

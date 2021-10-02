@@ -34,9 +34,13 @@ class UserRepository {
         null
     }
 
-    suspend fun getUser(userId: String) =
-        usersCollection.whereEqualTo(User::userId.name, userId).get().await()
-            .toObjects(User::class.java).first()
+    suspend fun getUser(userId: String): User? =
+        try {
+            usersCollection.whereEqualTo(User::userId.name, userId).get().await()
+                .toObjects(User::class.java).first()
+        }catch (e: Exception){
+            null
+        }
 
     fun auth(user: User) {
         currentUser = user

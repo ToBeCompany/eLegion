@@ -2,8 +2,58 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#131313">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/center">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/image_splash"
+            app:layout_constraintBottom_toTopOf="@id/atpv_1"/>
+
+        <yanzhikai.textpath.AsyncTextPathView
+            android:id="@+id/atpv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:duration="2000"
+            app:fillColor="@color/textSplash"
+            app:showPainter="true"
+            app:autoStart="true"
+            app:text="Легионеры разрабатывают"
+            app:pathStrokeColor="@color/textSplash"
+            app:textInCenter="true"
+            app:textSize="30sp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/atpv_2"
+            />
+
+        <yanzhikai.textpath.AsyncTextPathView
+            android:id="@+id/atpv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:duration="2000"
+            app:fillColor="@color/textSplash"
+            app:showPainter="true"
+            app:autoStart="true"
+            app:text="приложения с 2005 года"
+            app:pathStrokeColor="@color/textSplash"
+            app:textInCenter="true"
+            app:textSize="30sp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
         android:id="@+id/enter"
         android:layout_height="wrap_content"
@@ -36,5 +86,12 @@
         android:id="@+id/endVertical"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.85"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/center"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

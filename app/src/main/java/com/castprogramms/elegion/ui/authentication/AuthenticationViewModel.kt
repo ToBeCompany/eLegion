@@ -9,12 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 
 class AuthenticationViewModel(
@@ -32,20 +27,21 @@ class AuthenticationViewModel(
         )
     }
 
-    val isAuth = googleSignInClient.silentSignIn()
-
+    val auth = googleSignInClient.silentSignIn()
     var account: GoogleSignInAccount? = null
+    val isAuth: Boolean
+        get() = account != null && userRepository.currentUser != null
 
     fun signOut() {
         googleSignInClient.signOut()
         userRepository.singOut()
     }
 
-    suspend fun getUser(userId : String) = withContext(Dispatchers.IO){
+    suspend fun getUser(userId: String) = withContext(Dispatchers.IO) {
         userRepository.getUser(userId)
     }
 
-    fun auth(user: User){
+    fun auth(user: User) {
         userRepository.auth(user)
     }
 
