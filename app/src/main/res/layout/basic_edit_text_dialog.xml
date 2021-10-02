@@ -23,7 +23,7 @@
             android:backgroundTint="@color/purple_600"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Введите количество BatutCoin"
+            tools:text="Введите количество BatutCoin"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
