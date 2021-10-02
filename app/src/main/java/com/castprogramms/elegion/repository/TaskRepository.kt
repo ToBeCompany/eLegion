@@ -17,10 +17,10 @@ class TaskRepository {
 
     private val taskCollection = FirebaseFirestore.getInstance().collection(COLLECTION_TASK)
 
-    fun loadAllTasks(): Flow<Resource<List<CheckItem>>> =
+    fun loadAllTasks(userId : String): Flow<Resource<List<CheckItem>>> =
         flow<Resource<List<CheckItem>>> {
             emit(Resource.Loading())
-            val snapshot = taskCollection.get().await()
+            val snapshot = taskCollection.whereEqualTo(CheckItem::hostId.name,userId).get().await()
             val task = snapshot.toObjects(CheckItem::class.java)
             emit(Resource.Success(task))
         }.catch {
