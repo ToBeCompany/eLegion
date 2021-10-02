@@ -3,9 +3,12 @@ package com.castprogramms.elegion.ui.registration
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.coroutineScope
 import com.castprogramms.elegion.MainActivity
 import com.castprogramms.elegion.databinding.ActivityRegistrationBinding
 import com.castprogramms.elegion.ui.authentication.AuthenticationViewModel
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationActivity : AppCompatActivity() {
@@ -23,11 +26,17 @@ class RegistrationActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel.isAuth.addOnCompleteListener {
             if (it.isSuccessful) {
-                if (it.result != null)
-                    goToMain()
+                if (it.result != null) {
+                    lifecycle.coroutineScope.launch {
+                        val user = async { viewModel.getUser(it.result.id) }
+                        viewModel.auth(user.await())
+                        goToMain()
+                    }
+                }
             }
         }
     }
+
     fun goToMain() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()

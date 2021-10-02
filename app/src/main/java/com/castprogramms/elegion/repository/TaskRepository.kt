@@ -1,6 +1,8 @@
 package com.castprogramms.elegion.repository
 
+import android.util.Log
 import com.castprogramms.elegion.data.CheckItem
+import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
@@ -17,11 +19,13 @@ class TaskRepository {
 
     private val taskCollection = FirebaseFirestore.getInstance().collection(COLLECTION_TASK)
 
-    fun loadAllTasks(userId : String): Flow<Resource<List<CheckItem>>> =
+    fun loadAllTasks(userId: String): Flow<Resource<List<CheckItem>>> =
         flow<Resource<List<CheckItem>>> {
             emit(Resource.Loading())
-            val snapshot = taskCollection.whereEqualTo(CheckItem::hostId.name,userId).get().await()
-            val task = snapshot.toObjects(CheckItem::class.java)
+            val snapshot = taskCollection.whereEqualTo(CheckItem::hostId.name, userId).get().await()
+            val task =
+                snapshot.map { it.toObject(CheckItem::class.java).copy(path = it.reference.id) }
+            Log.d("OHOHO", task.toList().toString())
             emit(Resource.Success(task))
         }.catch {
             emit(Resource.Error(it.message.toString()))
@@ -35,11 +39,10 @@ class TaskRepository {
         emit(Resource.Error(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
-    fun complete(check: CheckItem) = flow<Resource<Boolean>> {
-        emit(Resource.Loading())
-        taskCollection.document().update("isComplete", true).await()
-        emit(Resource.Success(true))
-    }.catch {
-        emit(Resource.Error(it.message.toString()))
-    }.flowOn(Dispatchers.IO)
+    fun changeStatus(check: CheckItem, status: Boolean): Task<Void> {
+        Log.d("OHOHO", check.toString())
+
+        return taskCollection.document(check.path).update(CheckItem::complete.name, status)
+    }
+
 }

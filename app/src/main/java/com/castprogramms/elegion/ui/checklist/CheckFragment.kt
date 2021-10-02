@@ -1,13 +1,12 @@
 package com.castprogramms.elegion.ui.checklist
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
-import com.castprogramms.elegion.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.castprogramms.elegion.data.CheckItem
 import com.castprogramms.elegion.databinding.FragmentCheckBinding
 import com.castprogramms.elegion.repository.Resource
@@ -30,6 +29,7 @@ class CheckFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.checkList.layoutManager = LinearLayoutManager(requireContext())
         initAddButton()
         loadTasks()
         super.onViewCreated(view, savedInstanceState)
@@ -68,8 +68,11 @@ class CheckFragment : Fragment() {
                     is Resource.Loading -> {binding.progressBar.visibility = View.VISIBLE}
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        binding.checkList.adapter =
-                        ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, it.data!!)
+                        val adapter = TaskListAdapter(it.data!!) { value, tack ->
+                            viewModel.changeTaskStatus(tack, value)
+                            loadTasks()
+                        }
+                        binding.checkList.adapter = adapter
                     }
                 }
             }
