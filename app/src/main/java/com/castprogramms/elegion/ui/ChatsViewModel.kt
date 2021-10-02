@@ -5,9 +5,12 @@ import com.castprogramms.elegion.AddressRepository
 import com.castprogramms.elegion.data.TelegramAddress
 
 class ChatsViewModel(
-    private val addressRepository: AddressRepository
+        private val addressRepository: AddressRepository
 ) : ViewModel() {
-    fun getAllPosts() = addressRepository.getAllChats()
+
+    fun getChatByIndex(index : Int) = addressRepository.getAddress(index)
+
+    fun loadAllPosts() = addressRepository.loadAllChats()
 
     fun addPost(address: TelegramAddress) = addressRepository.addAddress(address)
 }

@@ -17,19 +17,22 @@ class AddressRepository {
 
     private val telegramCollection = FirebaseFirestore.getInstance().collection(COLLECTION_CHATS)
 
-    fun addTelegramAddress(ta: TelegramAddress, db: FirebaseFirestore) {
-        db.collection(COLLECTION_CHATS)
-            .add(ta)
-    }
+    private var chatcache: MutableList<TelegramAddress> = mutableListOf()
+    fun getAddress(index: Int) = chatcache.getOrNull(index)
 
-    fun getAllChats(): Flow<Resource<List<TelegramAddress>>> =
+    fun loadAllChats(): Flow<Resource<List<TelegramAddress>>> =
         flow<Resource<List<TelegramAddress>>> {
             emit(Resource.Loading())
 
             val snapshot = telegramCollection.get().await()
             val address = snapshot.toObjects(TelegramAddress::class.java)
+            chatcache = address
             emit(Resource.Success(address))
         }.catch {
+            chatcache.let {
+                if (it.isNotEmpty())
+                    emit(Resource.Loading(it))
+            }
             emit(Resource.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
 
