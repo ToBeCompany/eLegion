@@ -10,6 +10,7 @@
         android:name="com.castprogramms.elegion.ui.main.MainFragment"
         android:label="@string/home"
         tools:layout="@layout/main_fragment" />
+
     <fragment
         android:id="@+id/item_profile"
         android:name="com.castprogramms.elegion.ui.profile.ProfileFragment"
@@ -23,4 +24,15 @@
         android:id="@+id/checkFragment"
         android:name="com.castprogramms.elegion.ui.checklist.CheckFragment"
         android:label="@string/check_list" />
+
+    <fragment
+        android:id="@+id/item_calendar"
+        android:name="com.castprogramms.elegion.ui.calendar.CalendarFragment"
+        android:label="CalendarFragment" />
+
+    <fragment
+        android:id="@+id/item_chats"
+        android:name="com.castprogramms.elegion.ui.chats.ChatsFragment"
+        android:label="chats_fragment"
+        tools:layout="@layout/chats_fragment" />
 </navigation>
