@@ -10,4 +10,8 @@
         android:id="@+id/item_profile"
         android:title="@string/profile"
         android:icon="@drawable/person_24"/>
+    <item
+        android:id="@+id/item_chats"
+        android:title="@string/chats_title"
+        android:icon="@drawable/person_24"/>
 </menu>

@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/eLegion/app/src/main/res/layout/activity_main.xml" value="0.2171875" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/eLegion/app/src/main/res/layout/chats_fragment.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/eLegion/app/src/main/res/menu/nav_menu.xml" value="0.20520833333333333" />
         <entry key="..\:/StudioProjects/eLegion/app/src/main/res/drawable/background.xml" value="0.403125" />
         <entry key="..\:/StudioProjects/eLegion/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/StudioProjects/eLegion/app/src/main/res/layout/calendar_day_layout.xml" value="0.21875" />
