@@ -3,11 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/StudioProjects/eLegion/app/src/main/res/drawable-v24/background_color.xml" value="0.403125" />
+        <entry key="..\:/StudioProjects/eLegion/app/src/main/res/drawable-v24/button_success.xml" value="0.403125" />
         <entry key="..\:/StudioProjects/eLegion/app/src/main/res/drawable-v24/done.xml" value="0.23489583333333333" />
+        <entry key="..\:/StudioProjects/eLegion/app/src/main/res/drawable-v24/title_success.xml" value="0.403125" />
         <entry key="..\:/StudioProjects/eLegion/app/src/main/res/drawable/background.xml" value="0.403125" />
         <entry key="..\:/StudioProjects/eLegion/app/src/main/res/layout-v23/fragment_authentication.xml" value="0.21875" />
         <entry key="..\:/StudioProjects/eLegion/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/StudioProjects/eLegion/app/src/main/res/layout/activity_registration.xml" value="0.21875" />
+        <entry key="..\:/StudioProjects/eLegion/app/src/main/res/layout/basic_edit_text_dialog.xml" value="0.38697916666666665" />
         <entry key="..\:/StudioProjects/eLegion/app/src/main/res/layout/calendar_day_layout.xml" value="0.21875" />
         <entry key="..\:/StudioProjects/eLegion/app/src/main/res/layout/calendar_month_header_layout.xml" value="0.21875" />
         <entry key="..\:/StudioProjects/eLegion/app/src/main/res/layout/fragment_authentication.xml" value="0.33" />

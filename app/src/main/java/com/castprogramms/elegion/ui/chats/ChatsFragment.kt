@@ -54,7 +54,7 @@ class ChatsFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun buildAddressAddDialog(): AlertDialog.Builder {
+    private fun buildAddressAddDialog(): AlertDialog {
         return buildTextInputDialog(
             requireContext(),
             "Вставьте ссылку на ваш Telegram"
