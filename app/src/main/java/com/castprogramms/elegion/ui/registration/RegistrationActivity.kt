@@ -24,9 +24,9 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel.isAuth.addOnCompleteListener {
+        viewModel.auth.addOnCompleteListener {
             if (it.isSuccessful) {
-                if (it.result != null) {
+                if (viewModel.isAuth) {
                     lifecycle.coroutineScope.launch {
                         val user = async { viewModel.getUser(it.result.id) }
                         viewModel.auth(user.await())
