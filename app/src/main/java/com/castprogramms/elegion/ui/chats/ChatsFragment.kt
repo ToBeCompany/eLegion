@@ -115,9 +115,7 @@ class ChatsFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    binding.addressRecyclerView.adapter =
-                        ChatsAdapter(it.data) { openUri(it) }
-//                        ArrayAdapter(requireContext(), R.layout.simple_list_item_1, it.data!!)
+                    binding.addressRecyclerView.adapter = ChatsAdapter(it.data) { openUri(it) }
                 }
             }
         }
