@@ -21,6 +21,11 @@
     <style name="textBlackWhite">
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/white</item>
+    </style>
 
+
+    <style name="MiddleBackground">
+        <item name="android:background">@drawable/background_color</item>
+        <item name="android:backgroundTint">@color/norm_black</item>
     </style>
 </resources>
