@@ -3,7 +3,10 @@ package com.castprogramms.elegion.ui.registration
 import androidx.lifecycle.ViewModel
 import com.castprogramms.elegion.data.User
 import com.castprogramms.elegion.data.UserType
+import com.castprogramms.elegion.repository.Resource
 import com.castprogramms.elegion.repository.UserRepository
+import com.google.firebase.firestore.DocumentReference
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.util.*
 
@@ -25,8 +28,11 @@ class RegistrationViewModel(
     fun setUserType(userType: UserType) {
         type.value = userType
     }
+    fun setTelegram(address : String) {
+        telegram.value = address
+    }
 
-    fun createUser() {
+    fun createUser(): Flow<Resource<DocumentReference>> {
         //TODO take uuid from google acc
         val user = User(
             UUID.randomUUID().toString(),
@@ -35,6 +41,6 @@ class RegistrationViewModel(
             birthday.value.toString(),
             telegram.value
         )
-        userRepository.createUser(user)
+        return userRepository.createUser(user)
     }
 }
