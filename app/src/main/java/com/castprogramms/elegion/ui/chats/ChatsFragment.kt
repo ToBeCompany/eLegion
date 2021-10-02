@@ -15,7 +15,10 @@ import androidx.lifecycle.coroutineScope
 import com.castprogramms.elegion.data.TelegramAddress
 import com.castprogramms.elegion.databinding.ChatsFragmentBinding
 import com.castprogramms.elegion.repository.Resource
+import com.castprogramms.elegion.repository.UserRepository
 import com.castprogramms.elegion.tools.buildTextInputDialog
+import com.castprogramms.elegion.ui.authentication.AuthenticationViewModel
+import com.castprogramms.elegion.ui.registration.RegistrationViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,6 +39,10 @@ class ChatsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         updateAddressList()
         setOnAddressListItemListener()
+        initFab()
+    }
+
+    private fun initFab() {
         binding.addAddressFab.setOnClickListener {
             buildAddressAddDialog().show()
         }

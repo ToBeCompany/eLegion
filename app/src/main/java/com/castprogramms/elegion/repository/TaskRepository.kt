@@ -17,6 +17,20 @@ class TaskRepository {
         private const val COLLECTION_TASK = "tasks"
     }
 
+    private val startedTasks = listOf(
+        CheckItem(title = "Добавьтесь в чаты в телеграмме"),
+        CheckItem(title = "Ознакомтесь с информацией в Welcome book"),
+        CheckItem(title = "Ознакомтесь с красной книгой языков программирования"),
+    )
+    //todo call me
+    fun loadStartedTasks(userId: String) = flow<Resource<DocumentReference>> {
+        emit(Resource.Loading())
+        val task = taskCollection.add(startedTasks.map { it.copy(hostId = userId) }).await()
+        emit(Resource.Success(task))
+    }.catch {
+        emit(Resource.Error(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
     private val taskCollection = FirebaseFirestore.getInstance().collection(COLLECTION_TASK)
 
     fun loadAllTasks(userId: String): Flow<Resource<List<CheckItem>>> =
