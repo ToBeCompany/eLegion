@@ -3,6 +3,7 @@ package com.castprogramms.elegion.ui.authentication
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.castprogramms.elegion.ELegionerApplication
+import com.castprogramms.elegion.data.User
 import com.castprogramms.elegion.repository.UserRepository
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -23,19 +24,16 @@ class AuthenticationViewModel(
     val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
         .requestEmail().build()
 
-    lateinit var googleSignInClient: GoogleSignInClient
-    var account: GoogleSignInAccount? = null
-
-    init {
-        initGoogleSign()
-    }
-
-    private fun initGoogleSign() {
-        googleSignInClient = GoogleSignIn.getClient(
+    val googleSignInClient: GoogleSignInClient by lazy {
+        GoogleSignIn.getClient(
             (this.getApplication() as ELegionerApplication).applicationContext,
             gso
         )
     }
+
+    val isAuth = googleSignInClient.silentSignIn()
+
+    var account: GoogleSignInAccount? = null
 
     fun signOut() {
         googleSignInClient.signOut()
@@ -44,11 +42,18 @@ class AuthenticationViewModel(
 
     fun handleSignInResult(task: Task<GoogleSignInAccount>) = flow {
         account = task.getResult(ApiException::class.java)
-        emit(loadUserData(account))
+        emit(userNeedToRegistation(account))
     }.catch {
         emit(false)
     }.flowOn(Dispatchers.IO)
 
-    private suspend fun loadUserData(account: GoogleSignInAccount?) =
+    private suspend fun userNeedToRegistation(account: GoogleSignInAccount?) =
         (account != null && userRepository.hasUser(account.id) == null)
+
+    fun auth(user: User) {
+        userRepository.auth(user)
+    }
+
+    suspend fun hasThisUser(id: String) = userRepository.hasUser(id)
+
 }

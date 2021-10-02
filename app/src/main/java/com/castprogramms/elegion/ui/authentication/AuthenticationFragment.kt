@@ -10,17 +10,20 @@ import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.findNavController
 import com.castprogramms.elegion.R
 import com.castprogramms.elegion.databinding.FragmentAuthenticationBinding
+import com.castprogramms.elegion.ui.registration.RegistrationActivity
 import com.castprogramms.elegion.ui.registration.RegistrationActivity.Companion.SIGN_IN_CODE
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import kotlin.concurrent.timerTask
 
 class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
 
-    private val viewModel: AuthenticationViewModel by viewModel()
+    private val viewModel: AuthenticationViewModel by sharedViewModel()
     lateinit var binding: FragmentAuthenticationBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,7 +38,6 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
             )
             binding.enter.startMorphAnimation()
         }
-
     }
 
     private fun signIn() {
@@ -63,17 +65,19 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
             GoogleSignIn.getSignedInAccountFromIntent(data).addOnCompleteListener {
                 if (it.isSuccessful) {
                     lifecycle.coroutineScope.launch {
-                        viewModel.handleSignInResult(it).collectLatest {
-                            if (it){
-                                setTimerToGoRegistr()
-                            } else {
-                                binding.enter.revertAnimation {
-                                    binding.enter.text = "Успех"
-                                    binding.enter.isPressed = true
-                                    binding.enter.isClickable = false
-                                }
-                            }
+                        val hasUser = async { viewModel.hasThisUser(it.result.id)}.await()
+                        if (hasUser == null){
+                            viewModel.account = it.result
+                            setTimerToGoRegistr()
+                        } else {
+                            viewModel.auth(hasUser)
+                            (requireActivity() as RegistrationActivity).goToMain()
                         }
+                    }
+                    binding.enter.revertAnimation {
+                        binding.enter.text = "Успех"
+                        binding.enter.isPressed = true
+                        binding.enter.isClickable = false
                     }
                 }
             }
