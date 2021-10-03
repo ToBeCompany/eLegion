@@ -1,35 +1,91 @@
 package com.castprogramms.elegion.ui.profile
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.castprogramms.elegion.R
 import com.castprogramms.elegion.databinding.ProfileFragmentBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.shuhart.materialcalendarview.MaterialCalendarView
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
+import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground
+import uk.co.samuelwall.materialtaptargetprompt.extras.focals.RectanglePromptFocal
 
-class ProfileFragment : Fragment() {
-    private lateinit var viewModel: ProfileViewModel
+class ProfileFragment : Fragment(R.layout.profile_fragment) {
+    private val viewModel: ProfileViewModel by viewModel()
+    lateinit var binding: ProfileFragmentBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.profile_fragment, container, false)
+    private val checkListHelp by lazy {
+        MaterialTapTargetPrompt.Builder(this)
+            .setTarget(R.id.checkList)
+            .setPrimaryText("")
+            .setPromptBackground(RectanglePromptBackground())
+            .setPromptFocal(RectanglePromptFocal())
+            .setPromptStateChangeListener { _, state ->
+                if (state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                    planListHelp?.show()
+                    binding.messageText.text = "Твой личный план развития, чтобы не сбиться с пути"
+                }
+            }
+            .create()
+    }
 
-        val binding = ProfileFragmentBinding.bind(view)
+    private val planListHelp by lazy {
+        counterClick = 2
+        MaterialTapTargetPrompt.Builder(this)
+            .setTarget(R.id.plan)
+            .setPrimaryText("")
+            .setPromptBackground(RectanglePromptBackground())
+            .setPromptFocal(RectanglePromptFocal())
+            .setPromptStateChangeListener { _, state ->
+                if (state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                    binding.messageText.text = "Добро пожаловать, Легионер!"
+                }
+            }
+            .create()
+    }
+    var counterClick = 0
 
-        binding.toCheckList.setOnClickListener {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = ProfileFragmentBinding.bind(view)
+        viewModel.getUser()?.let {
+            binding.userName.text = it.name
+            binding.userPost.text = it.userType.nameType
+        }
+
+        GoogleSignIn.getLastSignedInAccount(requireContext())?.let {
+            Glide.with(binding.profileImage)
+                .load(it.photoUrl)
+                .into(binding.profileImage)
+        }
+
+        binding.checkList.setOnClickListener {
             findNavController().navigate(R.id.action_item_profile_to_checkFragment2)
         }
-        return view
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        binding.arrow.setOnClickListener {
+            show()
+            counterClick++
+        }
     }
-
+    private fun show(){
+        when(counterClick){
+            0 -> {
+                checkListHelp?.show()
+                binding.messageText.text = "Здесь твой чек-лист на неделю"
+            }
+            1 -> {
+                checkListHelp?.dismiss()
+                planListHelp?.show()
+                binding.messageText.text = "Твой личный план развития, чтобы не сбиться с пути"
+            }
+            else ->{
+                binding.messageText.text = "Добро пожаловать, Легионер!"
+            }
+        }
+    }
 }

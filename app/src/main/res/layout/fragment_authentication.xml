@@ -21,7 +21,7 @@
             android:id="@+id/atpv_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:duration="5000"
+            app:duration="2000"
             app:fillColor="@color/textSplash"
             app:showPainter="true"
             app:autoStart="true"
@@ -39,7 +39,7 @@
             android:id="@+id/atpv_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:duration="5000"
+            app:duration="2000"
             app:fillColor="@color/textSplash"
             app:showPainter="true"
             app:autoStart="true"
@@ -68,8 +68,8 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@id/endVertical"
         app:layout_constraintStart_toStartOf="@id/startVertical"
-        app:spinning_bar_color="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:spinning_bar_color="@color/white"
         app:spinning_bar_padding="6dp"
         app:spinning_bar_width="4dp" />
 
