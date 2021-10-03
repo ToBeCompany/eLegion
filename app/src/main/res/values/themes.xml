@@ -24,4 +24,8 @@
         <item name="android:backgroundTint">@color/white</item>
     </style>
 
+    <style name="MainBackground">
+        <item name="android:background">@color/light_grey</item>
+    </style>
+
 </resources>

@@ -26,6 +26,7 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
         val googleAuth = GoogleSignIn.getLastSignedInAccount(this)
         if (googleAuth != null){
             lifecycle.coroutineScope.launch(Dispatchers.IO) {

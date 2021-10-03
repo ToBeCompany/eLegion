@@ -6,12 +6,6 @@
     app:startDestination="@id/item_profile">
 
     <fragment
-        android:id="@+id/item_home"
-        android:name="com.castprogramms.elegion.ui.main.MainFragment"
-        android:label="@string/home"
-        tools:layout="@layout/main_fragment" />
-
-    <fragment
         android:id="@+id/item_profile"
         android:name="com.castprogramms.elegion.ui.profile.ProfileFragment"
         android:label="@string/profile"

@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="30dp"
             app:autoStart="true"
             app:duration="2000"
             app:fillColor="@color/textSplash"
@@ -35,14 +35,14 @@
             app:showPainter="true"
             app:text="Легионеры разрабатывают"
             app:textInCenter="true"
-            app:textSize="30sp" />
+            app:textSize="22sp" />
 
         <yanzhikai.textpath.AsyncTextPathView
             android:id="@+id/atpv_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="30dp"
             app:autoStart="true"
             app:duration="2000"
             app:fillColor="@color/textSplash"
@@ -52,7 +52,7 @@
             app:showPainter="true"
             app:text="приложения с 2005 года"
             app:textInCenter="true"
-            app:textSize="30sp" />
+            app:textSize="22sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
