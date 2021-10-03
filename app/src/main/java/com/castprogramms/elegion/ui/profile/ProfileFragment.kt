@@ -67,6 +67,10 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
             findNavController().navigate(R.id.action_item_profile_to_checkFragment2)
         }
 
+        binding.plan.setOnClickListener {
+            findNavController().navigate(R.id.action_item_profile_to_planFragment)
+        }
+
         binding.arrow.setOnClickListener {
             show()
             counterClick++

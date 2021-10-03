@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_item_profile_to_checkFragment2"
             app:destination="@id/checkFragment" />
+        <action
+            android:id="@+id/action_item_profile_to_planFragment"
+            app:destination="@id/planFragment" />
     </fragment>
 
     <fragment
@@ -35,4 +38,8 @@
         android:id="@+id/checkFragment"
         android:name="com.castprogramms.elegion.ui.checklist.CheckFragment"
         android:label="@string/check_list" />
+    <fragment
+        android:id="@+id/planFragment"
+        android:name="com.castprogramms.elegion.ui.plan.PlanFragment"
+        android:label="PlanFragment" />
 </navigation>

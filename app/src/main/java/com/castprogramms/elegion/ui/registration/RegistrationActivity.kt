@@ -25,6 +25,7 @@ class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
+        supportActionBar?.hide()
         setContentView(binding.root)
         supportActionBar?.hide()
         val googleAuth = GoogleSignIn.getLastSignedInAccount(this)
