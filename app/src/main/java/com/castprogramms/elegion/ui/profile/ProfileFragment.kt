@@ -1,14 +1,13 @@
 package com.castprogramms.elegion.ui.profile
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.castprogramms.elegion.R
 import com.castprogramms.elegion.databinding.ProfileFragmentBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.shuhart.materialcalendarview.MaterialCalendarView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
 import uk.co.samuelwall.materialtaptargetprompt.extras.backgrounds.RectanglePromptBackground

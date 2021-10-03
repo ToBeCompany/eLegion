@@ -1,6 +1,5 @@
 package com.castprogramms.elegion.ui.chats
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,12 +27,10 @@ class ChatsAdapter(
         val binding = ItemChatBinding.bind(view)
 
         fun bind(address: TelegramAddress){
-            Log.e("AAA", address.uri)
             binding.chatTitle.text = address.title.toString()
             binding.root.setOnClickListener{
                 openUri(address.uri)
             }
         }
     }
-
 }

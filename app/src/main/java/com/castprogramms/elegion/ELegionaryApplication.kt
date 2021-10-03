@@ -15,7 +15,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.module
 
-class ELegionerApplication : Application() {
+class ELegionaryApplication : Application() {
 
     private val appModule = module {
         single { AddressRepository() }
@@ -25,7 +25,7 @@ class ELegionerApplication : Application() {
         factory { StartInteractor(get(),get()) }
         viewModel { ChatsViewModel(get()) }
         viewModel { CalendarViewModel(get()) }
-        viewModel { AuthenticationViewModel(get(), this@ELegionerApplication) }
+        viewModel { AuthenticationViewModel(get(), this@ELegionaryApplication) }
         viewModel { CheckViewModel(get(), get()) }
         viewModel { ProfileViewModel(get()) }
         viewModel { RegistrationViewModel(get(), get()) }
@@ -36,7 +36,7 @@ class ELegionerApplication : Application() {
 
         startKoin {
             androidLogger()
-            androidContext(this@ELegionerApplication)
+            androidContext(this@ELegionaryApplication)
             modules(appModule)
         }
     }
