@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.castprogramms.elegion.R
 import com.castprogramms.elegion.data.CheckItem
 import com.castprogramms.elegion.databinding.FragmentCheckBinding
 import com.castprogramms.elegion.repository.Resource
@@ -37,7 +38,7 @@ class CheckFragment : Fragment() {
 
     private fun initAddButton() {
         binding.floatingActionButton.setOnClickListener {
-            buildTextInputDialog(requireContext(), "Задача"){
+            buildTextInputDialog(requireContext(), getString(R.string.task)){
                 if (it.isNotEmpty()){
                     lifecycle.coroutineScope.launch {
                         viewModel.createTask(CheckItem(title = it)).collectLatest {

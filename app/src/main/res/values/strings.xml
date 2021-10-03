@@ -20,4 +20,6 @@
     <string name="text_tg">Введите имя канала:</string>
     <string name="calendar">Календарь</string>
     <string name="lern">План развития</string>
+    <string name="hintPuturi">Вставьте ссылку на ваш Telegram</string>
+    <string name="task">Задача</string>
 </resources>

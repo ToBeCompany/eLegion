@@ -53,7 +53,11 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
 
     private fun setTimerToGoRegistr() {
         Timer().schedule(
-            timerTask { binding.enter.post { findNavController().navigate(R.id.action_authenticationFragment_to_registrationFragment) } },
+            timerTask {
+                binding.enter.post {
+                    findNavController().navigate(R.id.action_authenticationFragment_to_registrationFragment)
+                }
+            },
             250
         )
     }
@@ -64,8 +68,8 @@ class AuthenticationFragment : Fragment(R.layout.fragment_authentication) {
             GoogleSignIn.getSignedInAccountFromIntent(data).addOnCompleteListener {
                 if (it.isSuccessful) {
                     lifecycle.coroutineScope.launch {
-                        val hasUser = async { viewModel.hasThisUser(it.result.id)}.await()
-                        if (hasUser == null){
+                        val hasUser = async { viewModel.hasThisUser(it.result.id) }.await()
+                        if (hasUser == null) {
                             viewModel.account = it.result
                             setTimerToGoRegistr()
                         } else {

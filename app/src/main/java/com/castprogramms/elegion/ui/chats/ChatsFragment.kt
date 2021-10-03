@@ -37,19 +37,10 @@ class ChatsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         updateAddressList()
-//        setOnAddressListItemListener()
         binding.addAddressFab.setOnClickListener {
             buildAddressAddDialog().show()
         }
     }
-
-    /*private fun setOnAddressListItemListener() {
-        binding.addressRecyclerView.setOnItemClickListener { _, _, index, l ->
-            viewModel.getChatByIndex(index)?.let {
-                openUri(it.uri)
-            }
-        }
-    }*/
 
     private fun openUri(uri: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
@@ -59,7 +50,7 @@ class ChatsFragment : Fragment() {
     private fun buildAddressAddDialog(): AlertDialog {
         return buildTextInputDialog(
             requireContext(),
-            "Вставьте ссылку на ваш Telegram"
+            getString(R.string.hintPuturi)
         ) { link: String, name: String ->
             if (link.isNotEmpty() && name.isNotEmpty()) {
                 lifecycle.coroutineScope.launch {

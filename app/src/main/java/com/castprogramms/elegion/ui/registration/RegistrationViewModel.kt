@@ -46,7 +46,6 @@ class RegistrationViewModel(
             birthday.value.toString(),
             telegram.value
         )
-//        userRepository.auth(user)
         return userRepository.createUser(user)
     }
 }

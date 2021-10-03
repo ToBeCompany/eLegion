@@ -2,7 +2,7 @@ package com.castprogramms.elegion.ui.authentication
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.castprogramms.elegion.ELegionerApplication
+import com.castprogramms.elegion.ELegionaryApplication
 import com.castprogramms.elegion.data.User
 import com.castprogramms.elegion.repository.UserRepository
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -22,15 +22,12 @@ class AuthenticationViewModel(
 
     val googleSignInClient: GoogleSignInClient by lazy {
         GoogleSignIn.getClient(
-            (this.getApplication() as ELegionerApplication).applicationContext,
+            (this.getApplication() as ELegionaryApplication).applicationContext,
             gso
         )
     }
 
-    val auth = googleSignInClient.silentSignIn()
     var account: GoogleSignInAccount? = null
-    val isAuth: Boolean
-        get() = account != null && userRepository.currentUser != null
 
     fun signOut() {
         googleSignInClient.signOut()
@@ -46,5 +43,4 @@ class AuthenticationViewModel(
     }
 
     suspend fun hasThisUser(id: String) = userRepository.hasUser(id)
-
 }
