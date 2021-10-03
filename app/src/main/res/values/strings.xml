@@ -16,4 +16,5 @@
     <string name="signOut">Выйти</string>
     <string name="text">Введите текст:</string>
     <string name="registr">зарегистрироваться</string>
+    <string name="plan">План развития</string>
 </resources>

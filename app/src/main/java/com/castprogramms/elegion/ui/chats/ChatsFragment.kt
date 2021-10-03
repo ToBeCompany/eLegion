@@ -82,7 +82,7 @@ class ChatsFragment : Fragment() {
         viewModel.addPost(ta).collectLatest {
             when (it) {
                 is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.addressRecyclerView.hideShimmer()
                     Toast.makeText(
                         requireContext(),
                         it.message,
@@ -90,9 +90,10 @@ class ChatsFragment : Fragment() {
                     ).show()
                 }
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.addressRecyclerView.showShimmer()
                 }
                 is Resource.Success -> {
+                    binding.addressRecyclerView.hideShimmer()
                     updateAddressList()
                 }
             }
@@ -103,7 +104,7 @@ class ChatsFragment : Fragment() {
         viewModel.loadAllPosts().collectLatest {
             when (it) {
                 is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.addressRecyclerView.hideShimmer()
                     Toast.makeText(
                         requireContext(),
                         it.message,
@@ -111,10 +112,10 @@ class ChatsFragment : Fragment() {
                     ).show()
                 }
                 is Resource.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.addressRecyclerView.showShimmer()
                 }
                 is Resource.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.addressRecyclerView.hideShimmer()
                     binding.addressRecyclerView.adapter = ChatsAdapter(it.data) { openUri(it) }
                 }
             }
