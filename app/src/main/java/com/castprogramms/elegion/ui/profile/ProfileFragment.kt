@@ -60,6 +60,7 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
         GoogleSignIn.getLastSignedInAccount(requireContext())?.let {
             Glide.with(binding.profileImage)
                 .load(it.photoUrl)
+                .error(R.drawable.profile)
                 .into(binding.profileImage)
         }
 
