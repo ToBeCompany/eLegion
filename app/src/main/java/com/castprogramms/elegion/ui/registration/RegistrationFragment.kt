@@ -77,6 +77,7 @@ class RegistrationFragment : Fragment(R.layout.registration_fragment) {
                             is Resource.Error -> {
                                 binding.doneButton.revertAnimation {
                                     binding.doneButton.text = "Ошибка"
+                                    
                                     binding.doneButton.isPressed = true
                                     binding.doneButton.isClickable = false
                                 }
