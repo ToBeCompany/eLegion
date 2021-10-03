@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class AddressRepository {
     companion object {
@@ -36,9 +37,15 @@ class AddressRepository {
             emit(Resource.Error(it.message.toString()))
         }.flowOn(Dispatchers.IO)
 
+    suspend fun createAddress(telegramAddress: TelegramAddress) = withContext(Dispatchers.IO) {
+        telegramCollection.add(
+            telegramAddress
+        )
+    }.await()
+
     fun addAddress(telegramAddress: TelegramAddress) = flow<Resource<DocumentReference>> {
         emit(Resource.Loading())
-        val addressRef = telegramCollection.add(telegramAddress).await()
+        val addressRef = createAddress(telegramAddress)
         emit(Resource.Success(addressRef))
     }.catch {
         emit(Resource.Error(it.message.toString()))

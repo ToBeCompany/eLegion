@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class TaskRepository {
     companion object {
@@ -22,16 +23,16 @@ class TaskRepository {
         CheckItem(title = "Ознакомтесь с информацией в Welcome book"),
         CheckItem(title = "Ознакомтесь с красной книгой языков программирования"),
     )
-    //todo call me
-    fun loadStartedTasks(userId: String) = flow<Resource<DocumentReference>> {
-        emit(Resource.Loading())
-        val task = taskCollection.add(startedTasks.map { it.copy(hostId = userId) }).await()
-        emit(Resource.Success(task))
-    }.catch {
-        emit(Resource.Error(it.message.toString()))
-    }.flowOn(Dispatchers.IO)
 
     private val taskCollection = FirebaseFirestore.getInstance().collection(COLLECTION_TASK)
+
+    suspend fun loadStartedTasks(userId: String) = withContext(Dispatchers.IO) {
+        startedTasks.map {
+            it.copy(hostId = userId)
+        }.forEach {
+            taskCollection.add(it)
+        }
+    }
 
     fun loadAllTasks(userId: String): Flow<Resource<List<CheckItem>>> =
         flow<Resource<List<CheckItem>>> {

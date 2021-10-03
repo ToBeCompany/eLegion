@@ -1,17 +1,21 @@
 package com.castprogramms.elegion.ui.registration
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.castprogramms.elegion.data.User
 import com.castprogramms.elegion.data.UserType
+import com.castprogramms.elegion.interactors.StartInteractor
 import com.castprogramms.elegion.repository.Resource
 import com.castprogramms.elegion.repository.UserRepository
 import com.google.firebase.firestore.DocumentReference
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import java.util.*
 
 class RegistrationViewModel(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val startInteractor: StartInteractor
 ) : ViewModel() {
 
     private val userName = MutableStateFlow("")
@@ -31,7 +35,9 @@ class RegistrationViewModel(
     fun setTelegram(address : String) {
         telegram.value = address
     }
-
+    suspend fun loadStartData(){
+        userRepository.currentUser?.let { startInteractor.setupData(it) }
+    }
     fun createUser(id : String): Flow<Resource<DocumentReference>> {
         val user = User(
             id,
@@ -40,7 +46,7 @@ class RegistrationViewModel(
             birthday.value.toString(),
             telegram.value
         )
-        userRepository.auth(user)
+//        userRepository.auth(user)
         return userRepository.createUser(user)
     }
 }
