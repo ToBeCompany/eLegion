@@ -1,4 +1,4 @@
-package com.castprogramms.elegion.tools
+package com.castprogramms.elegion.ui.chats
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,13 +12,13 @@ import com.castprogramms.elegion.databinding.ItemChatBinding
 class ChatsAdapter(
     private val value: List<TelegramAddress>?, private val openUri: (String) -> Unit
 ) : RecyclerView.Adapter<ChatsAdapter.ChatsViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatsAdapter.ChatsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatsViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_chat, parent, false)
         return ChatsViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ChatsAdapter.ChatsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ChatsViewHolder, position: Int) {
         holder.bind(value!![position])
     }
 
@@ -30,7 +30,7 @@ class ChatsAdapter(
         fun bind(address: TelegramAddress){
             Log.e("AAA", address.uri)
             binding.chatTitle.text = address.title.toString()
-            binding.chatTitle.setOnClickListener{
+            binding.root.setOnClickListener{
                 openUri(address.uri)
             }
         }

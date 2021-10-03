@@ -17,4 +17,5 @@
     <string name="text">Введите текст:</string>
     <string name="registr">зарегистрироваться</string>
     <string name="plan">План развития</string>
+    <string name="text_tg">Введите имя канала:</string>
 </resources>

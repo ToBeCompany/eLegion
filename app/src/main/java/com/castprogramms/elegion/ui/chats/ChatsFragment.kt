@@ -1,21 +1,23 @@
 package com.castprogramms.elegion.ui.chats
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.castprogramms.elegion.R
 import com.castprogramms.elegion.data.TelegramAddress
+import com.castprogramms.elegion.databinding.ChatsAlertDialogBinding
 import com.castprogramms.elegion.databinding.ChatsFragmentBinding
 import com.castprogramms.elegion.repository.Resource
-import com.castprogramms.elegion.tools.ChatsAdapter
-import com.castprogramms.elegion.tools.buildTextInputDialog
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -58,15 +60,10 @@ class ChatsFragment : Fragment() {
         return buildTextInputDialog(
             requireContext(),
             "Вставьте ссылку на ваш Telegram"
-        ) {
-            if (it.isNotEmpty()) {
+        ) { link: String, name: String ->
+            if (link.isNotEmpty() && name.isNotEmpty()) {
                 lifecycle.coroutineScope.launch {
-                    addAddress(
-                        TelegramAddress(
-                            "username",
-                            it
-                        )
-                    )
+                    addAddress(TelegramAddress(name, link))
                 }
             }
         }
@@ -76,6 +73,33 @@ class ChatsFragment : Fragment() {
         lifecycle.coroutineScope.launch {
             loadAddressList()
         }
+    }
+
+    private fun buildTextInputDialog(
+        context: Context,
+        title: String,
+        result: (input: String, name: String) -> Unit
+    ): AlertDialog {
+        var address = ""
+        val view = LayoutInflater.from(context).inflate(R.layout.chats_alert_dialog, null)
+        val binding = ChatsAlertDialogBinding.bind(view)
+        val ad = AlertDialog.Builder(context)
+            .setView(view)
+            .create()
+            .apply {
+                if (window != null)
+                    window!!.setBackgroundDrawable(ColorDrawable(0))
+            }
+
+        binding.button.setOnClickListener {
+            result(address, binding.titleTg.text.toString())
+            ad.dismiss()
+        }
+        binding.textDialog.apply {
+            addTextChangedListener { address = text.toString() }
+        }
+        binding.textTitle.text = title
+        return ad
     }
 
     private suspend fun addAddress(ta: TelegramAddress) {
