@@ -18,4 +18,6 @@
     <string name="registr">зарегистрироваться</string>
     <string name="plan">План развития</string>
     <string name="text_tg">Введите имя канала:</string>
+    <string name="calendar">Календарь</string>
+    <string name="lern">План развития</string>
 </resources>

@@ -3,8 +3,10 @@ package com.castprogramms.elegion.ui.registration
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.coroutineScope
 import com.castprogramms.elegion.MainActivity
+import com.castprogramms.elegion.R
 import com.castprogramms.elegion.databinding.ActivityRegistrationBinding
 import com.castprogramms.elegion.ui.authentication.AuthenticationViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -28,6 +30,8 @@ class RegistrationActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setContentView(binding.root)
         supportActionBar?.hide()
+        window.statusBarColor = ContextCompat.getColor(this, R.color.black_main)
+
         val googleAuth = GoogleSignIn.getLastSignedInAccount(this)
         if (googleAuth != null){
             lifecycle.coroutineScope.launch(Dispatchers.IO) {

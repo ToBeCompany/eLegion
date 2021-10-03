@@ -18,13 +18,14 @@
             app:destination="@id/checkFragment" />
         <action
             android:id="@+id/action_item_profile_to_planFragment"
-            app:destination="@id/planFragment" />
+            app:destination="@id/planFragment"
+            app:popUpTo="@id/item_profile" />
     </fragment>
 
     <fragment
         android:id="@+id/item_calendar"
         android:name="com.castprogramms.elegion.ui.calendar.CalendarFragment"
-        android:label="CalendarFragment" />
+        android:label="@string/calendar" />
 
     <fragment
         android:id="@+id/item_chats"
@@ -41,5 +42,5 @@
     <fragment
         android:id="@+id/planFragment"
         android:name="com.castprogramms.elegion.ui.plan.PlanFragment"
-        android:label="PlanFragment" />
+        android:label="@string/lern" />
 </navigation>
