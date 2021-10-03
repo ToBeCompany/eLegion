@@ -4,24 +4,21 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.text.format.DateFormat
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
-import androidx.navigation.fragment.findNavController
 import com.castprogramms.elegion.R
-import com.castprogramms.elegion.ui.registration.RegistrationActivity
+import com.castprogramms.elegion.data.TelegramAddress
 import com.castprogramms.elegion.data.UserType
 import com.castprogramms.elegion.databinding.RegistrationFragmentBinding
 import com.castprogramms.elegion.repository.Resource
 import com.castprogramms.elegion.ui.authentication.AuthenticationViewModel
+import com.castprogramms.elegion.ui.chats.ChatsViewModel
+import com.castprogramms.elegion.ui.checklist.CheckViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.type.Date
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -93,9 +90,10 @@ class RegistrationFragment : Fragment(R.layout.registration_fragment) {
                                     binding.doneButton.isPressed = true
                                     binding.doneButton.isClickable = false
                                 }
-                                val user = async { authViewModel.getUser(account.id) }
-                                if (user.await() != null) {
-                                    authViewModel.auth(user.await()!!)
+                                val user = async { authViewModel.getUser(account.id) }.await()
+                                if (user != null) {
+                                    authViewModel.auth(user)
+                                    viewModel.loadStartData()
                                     setTimerToGoMain()
                                 }
                             }

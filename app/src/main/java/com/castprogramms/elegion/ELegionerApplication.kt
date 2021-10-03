@@ -1,6 +1,7 @@
 package com.castprogramms.elegion
 
 import android.app.Application
+import com.castprogramms.elegion.interactors.StartInteractor
 import com.castprogramms.elegion.repository.*
 import com.castprogramms.elegion.ui.authentication.AuthenticationViewModel
 import com.castprogramms.elegion.ui.calendar.CalendarViewModel
@@ -21,12 +22,13 @@ class ELegionerApplication : Application() {
         single { CalendarRepository() }
         single { UserRepository() }
         single { TaskRepository() }
+        factory { StartInteractor(get(),get()) }
         viewModel { ChatsViewModel(get()) }
         viewModel { CalendarViewModel(get()) }
         viewModel { AuthenticationViewModel(get(), this@ELegionerApplication) }
-        viewModel { RegistrationViewModel(get()) }
         viewModel { CheckViewModel(get(), get()) }
         viewModel { ProfileViewModel(get()) }
+        viewModel { RegistrationViewModel(get(), get()) }
     }
 
     override fun onCreate() {
